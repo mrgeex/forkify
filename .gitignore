@@ -1,5 +1,6 @@
 dist
-node_modules
+node_modules/*
+!node_modules/fractional/
 .idea
 .parcel-cache
 package-lock.json
