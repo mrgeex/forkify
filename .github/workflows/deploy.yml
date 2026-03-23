@@ -23,6 +23,8 @@ jobs:
 
       - run: npm install
       - run: npm run build
+        env:
+          API_KEY: ${{ secrets.API_KEY }}
 
       - uses: actions/upload-pages-artifact@v3
         with:
