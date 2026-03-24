@@ -1,11 +1,11 @@
-import { API_KEY, API_URL } from "./config";
-import { RES_PER_PAGE } from "./config";
-import { AJAX } from "./helper";
+import { API_KEY, API_URL } from './config';
+import { RES_PER_PAGE } from './config';
+import { AJAX } from './helper';
 
 export const state = {
   recipe: {},
   search: {
-    query: "",
+    query: '',
     results: [],
     resultsPerPage: RES_PER_PAGE,
     page: 1,
@@ -31,7 +31,6 @@ function createRecipeObject(data) {
 export async function fetchRecipes(id) {
   try {
     const data = await AJAX(`${API_URL}${id}?key=${API_KEY}`);
-    console.log(API_KEY)
 
     // console.log(res, data);
     state.recipe = createRecipeObject(data);
@@ -86,7 +85,7 @@ export function updateServings(newServings) {
 }
 
 function persistBookmarks() {
-  localStorage.setItem("bookmarks", JSON.stringify(state.bookmarks));
+  localStorage.setItem('bookmarks', JSON.stringify(state.bookmarks));
 }
 
 export function addBookMark(recipe) {
@@ -105,9 +104,9 @@ export function deleteBookMark(id) {
 export async function uploadRecipe(newRecipe) {
   try {
     const ingredients = Object.entries(newRecipe)
-      .filter((item) => item[0].startsWith("ingredient") && item[1] !== "")
+      .filter((item) => item[0].startsWith('ingredient') && item[1] !== '')
       .map((ingredient) => {
-        const ingArr = ingredient[1].split(",").map((item) => item.trim());
+        const ingArr = ingredient[1].split(',').map((item) => item.trim());
         if (ingArr.length < 3)
           throw new Error(
             `Value Invalid: Please follow the ingredient format!`,
@@ -138,12 +137,12 @@ export async function uploadRecipe(newRecipe) {
 
 // For Debugging
 function clearStorage() {
-  localStorage.removeItem("bookmarks");
+  localStorage.removeItem('bookmarks');
 }
 // clearStorage();
 
 function init() {
-  const storage = JSON.parse(localStorage.getItem("bookmarks"));
+  const storage = JSON.parse(localStorage.getItem('bookmarks'));
   if (storage) state.bookmarks = storage;
 }
 init();
